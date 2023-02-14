@@ -1,0 +1,52 @@
+.landing {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../Assets/images/background_landing.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 9rem 0;
+    color: var(--white-color);
+    font-family: var(--primary-font);
+    display: flex;
+    justify-content: center;
+}
+  
+.landing__title {
+    font-size: 3.4rem;
+    font-weight: bold;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+  
+.landing__searchbar {
+width: 600px;
+margin: auto;
+height: 40px;
+display: flex;
+flex-direction: row;
+background-color: var(--white-color);
+border-radius: 10px;
+}
+  
+  .landing__searchbar-input {
+    width: 90%;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    padding-right: 20px;
+    font-family: var(--primary-font);
+    font-size: 15px;
+  }
+  
+.landing__searchbar-btn {
+    border: none;
+    border-radius: 1rem;
+    padding: 0 18px;
+    cursor: pointer;
+}
+.landing__searchbar-btn:hover{
+    opacity: 0.8;
+}

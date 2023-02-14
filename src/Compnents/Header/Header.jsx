@@ -1,4 +1,5 @@
 import React from 'react'
+import Landing from '../Landing/Landing'
 import NavBar from '../Navbar/NavBar'
 import TopBar from '../TopBar/TopBar'
 
@@ -7,6 +8,7 @@ const Header = () => {
     <div>
       <TopBar/>
       <NavBar/>
+      <Landing/>
     </div>
   )
 }

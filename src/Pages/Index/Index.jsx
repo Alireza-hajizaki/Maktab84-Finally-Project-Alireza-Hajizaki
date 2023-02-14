@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../../Compnents/Header/Header'
 
 const Index = () => {
   return (
-    <div>Index</div>
+    <div>
+      <Header/>
+    </div>
   )
 }
 

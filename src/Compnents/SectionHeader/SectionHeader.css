@@ -1,0 +1,25 @@
+.section-title{
+    text-align: center;
+    padding: 25px;
+    font-size: 27px;
+    color: var(--primary-color);
+}
+.section-title::after,
+.section-title::before{
+    background-color: black;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+    width: 5%;
+    position: relative;
+
+}
+.section-title::before{
+    right: 0.5rem;
+    margin-left: -20%;
+}
+.section-title::after{
+      left: 0.5rem;
+      margin-right: -20%;
+}

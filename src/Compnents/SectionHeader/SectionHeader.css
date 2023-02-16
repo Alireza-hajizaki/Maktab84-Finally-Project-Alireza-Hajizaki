@@ -17,9 +17,9 @@
 }
 .section-title::before{
     right: 0.5rem;
-    margin-left: -20%;
+    margin-left: -25%;
 }
 .section-title::after{
       left: 0.5rem;
-      margin-right: -20%;
+      margin-right: -25%;
 }

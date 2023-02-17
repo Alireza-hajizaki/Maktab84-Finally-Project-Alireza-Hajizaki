@@ -5,6 +5,7 @@ import LatestCourses from '../../Compnents/LatestCourses/LatestCourses'
 import AboutUs from '../../Compnents/AboutUs/AboutUs';
 import Landing from "../../Compnents/Landing/Landing"
 import LatestArticles from '../../Compnents/LatestArticles/LatestArticles';
+import Footer from '../../Layout/Footer/Footer';
 
 const Index = () => {
   return (
@@ -12,8 +13,9 @@ const Index = () => {
       <Header/>
       <Landing/>
       <LatestCourses/>
-      <AboutUs/>
       <LatestArticles/>
+      <AboutUs/>
+      <Footer/>
     </div>
   )
 }

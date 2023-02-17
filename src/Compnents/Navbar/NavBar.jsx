@@ -10,7 +10,7 @@ const NavBar = () => {
         <div className="container-fluid">
           <div className="main-header__content">
             <div className="main-header__right">
-              <img src="images/logo/logo-1.png" className="main-header__logo" alt="Blue learn logo" />
+              <img src="/images/logo/logo-1.png" className="main-header__logo" alt="Blue learn logo" />
 
               <ul className="main-header__menu">
                 <li className="main-header__item">

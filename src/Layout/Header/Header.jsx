@@ -1,14 +1,12 @@
 import React from 'react'
-import Landing from '../Landing/Landing'
-import NavBar from '../Navbar/NavBar'
-import TopBar from '../TopBar/TopBar'
+import NavBar from '../../Compnents/Navbar/NavBar'
+import TopBar from '../../Compnents/TopBar/TopBar'
 
 const Header = () => {
   return (
     <div>
       <TopBar/>
       <NavBar/>
-      <Landing/>
     </div>
   )
 }

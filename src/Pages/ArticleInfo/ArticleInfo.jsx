@@ -8,6 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CommentTextArea from '../../Compnents/CommentTextArea/CommentTextArea';
 
 const ArticleInfo = () => {
   return (
@@ -142,8 +143,10 @@ const ArticleInfo = () => {
                   </div>
                 </div>
               </div>
-            </div>
 
+              <CommentTextArea/>
+
+            </div>
             <div class="col-4">
               <div class="courses-info">
 

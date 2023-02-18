@@ -2,6 +2,7 @@ import React from 'react';
 import CourseBox from '../CourseBox/CourseBox';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import "./LatestCourses.css";
+import { Link } from 'react-router-dom';
 
 const LatestCourses = () => {
   return (
@@ -24,6 +25,12 @@ const LatestCourses = () => {
           </div>
         </div>
       </div>
+
+        
+      <div>
+      <Link to='/courses' className='courses__gtl'>تمامی دوره ها</Link>
+      </div>
+
     </div>
   )
 }

@@ -10,6 +10,7 @@ import DescCourseBox from '../../Compnents/DescCourseBox/DescCourseBox';
 import SchoolIcon from '@mui/icons-material/School';
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CommentTextArea from '../../Compnents/CommentTextArea/CommentTextArea';
 
 
 const CourseInfo = () => {
@@ -121,6 +122,9 @@ const CourseInfo = () => {
                     </p>
                 </div>
               </div>
+              
+              <CommentTextArea/>
+
             </div>
           </div>
         

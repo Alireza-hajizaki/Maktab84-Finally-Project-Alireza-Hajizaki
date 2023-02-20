@@ -1,9 +1,8 @@
-import React from 'react'
+import { configureStore } from "@reduxjs/toolkit";
+import courseInfoSlice from "../slices/courseInfoSlice";
 
-const store = () => {
-  return (
-    <div>store</div>
-  )
-}
-
-export default store
+export default configureStore({
+  reducer:{
+    courseInfo : courseInfoSlice,
+  }
+})

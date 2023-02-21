@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect , useState } from 'react';
 import "./CourseInfo.css";
 import Header from "../../Layout/Header/Header"
 import Footer from "../../Layout/Footer/Footer"
@@ -11,9 +11,28 @@ import SchoolIcon from '@mui/icons-material/School';
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CommentTextArea from '../../Compnents/CommentTextArea/CommentTextArea';
+import { useParams } from 'react-router';
 
 
 const CourseInfo = () => {
+
+  const {courseName} = useParams()
+  const [sessions, setSessions]= useState([])
+  const [courseDeteils, setCourseDeteils]= useState({})
+ 
+  useEffect(()=>{
+    fetch(`http://localhost:3001/v1/courses/${courseName}`,{
+      method:'POST',
+      headers:{
+        'Authorization' : `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
+      }
+    }).then(res => res.json())
+    .then(courseInfo =>{
+      setCourseDeteils(courseInfo)
+      setSessions(courseInfo.sessions)
+    })
+  } ,[])
+
   return (
     <div>
       <Header/>
@@ -33,10 +52,10 @@ const CourseInfo = () => {
               آموزش برنامه نویسی فرانت اند
             </a>
             <h1 className="course-info__title">
-              آموزش 20 کتابخانه جاوااسکریپت برای بازار کار
+              {courseDeteils.name}
             </h1>
             <p className="course-info__text">
-              امروزه کتابخانه‌ها کد نویسی را خیلی آسان و لذت بخش تر کرده اند. به قدری که حتی امروزه هیچ شرکت برنامه نویسی پروژه های خود را با Vanilla Js پیاده سازی نمی کند و همیشه از کتابخانه ها و فریمورک های موجود استفاده می کند. پس شما هم اگه میخواید یک برنامه نویس عالی فرانت اند باشید، باید کتابخانه های کاربردی که در بازار کار استفاده می شوند را به خوبی بلد باشید
+              {courseDeteils.description}
             </p>
             <div className="course-info__social-media">
               <a href="#" className="course-info__social-media-item">

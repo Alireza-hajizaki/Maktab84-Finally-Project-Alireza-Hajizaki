@@ -15,7 +15,6 @@ const NavBar = () => {
     fetch(`http://localhost:3001/v1/menus`)
       .then((res) => res.json())
       .then((menus) => {
-        console.log(menus);
         setAllMenus(menus);
       });
   }, []);

@@ -35,7 +35,6 @@ function App() {
         setUserInfos(userData)
       })
     }
-    console.log(localStorageData);
   } ,[login])
 
   const router = useRoutes(routes)

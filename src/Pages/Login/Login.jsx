@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import "./Login.css";
 import Header from "../../Layout/Header/Header";
 import Footer from "../../Layout/Footer/Footer";
-import {Link} from 'react-router-dom';
+import {Link , Navigate, useNavigate} from 'react-router-dom';
 import Input from "../../Compnents/Form/Input"
 import Button from "../../Compnents/Form/Button"
 import { requiredValidator, minValidator, maxValidator, emailValidator } from "../../validators/rulse"; 
 import {useForm} from '../../Hook/useForm'
+import AuthContext from '../../Context/authContext';
+import swal from 'sweetalert';
 
 const Login = () => {
+
+  const navigate = useNavigate()
+  const authContext = useContext(AuthContext)
 
   const [formState, onInputHandler] = useForm(
     {
@@ -24,10 +29,48 @@ const Login = () => {
     false
   );
 
-  console.log(formState);
+
 
   const userLogin = (event) => {
     event.preventDefault()
+
+    const userData = {
+      identifier: formState.inputs.username.value,
+      password: formState.inputs.password.value,
+    };
+
+    fetch(`http://localhost:3001/v1/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        } else {
+          return res.json();
+        }
+      })
+      .then((result) => {
+        authContext.login({}, result.accessToken)
+        swal({
+          title:"با موفقیت لاگین شدید",
+          icon: 'success',
+          button: "ورود به پنل کاربری"
+        }).then(value => navigate('/'))
+      })
+      .catch((err) => {
+        swal({
+          title:"کاربری با این نام وجود ندارد",
+          icon: 'error',
+          button: "تلاش دوباره"
+        })
+      });
+
     console.log('User Login');
   }
 
@@ -59,7 +102,7 @@ const Login = () => {
                   requiredValidator(),
                   minValidator(8),
                   maxValidator(20),
-                  emailValidator()
+                  // emailValidator()
                 ]}
                 onInputHandler={onInputHandler}
               />

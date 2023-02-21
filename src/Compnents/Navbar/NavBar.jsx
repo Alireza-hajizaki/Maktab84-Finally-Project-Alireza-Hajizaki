@@ -1,10 +1,15 @@
 import "./NavBar.css"
-import React from 'react';
+import React, { useContext } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import AuthContext from '../../Context/authContext'
+import {Link} from 'react-router-dom';
 
 const NavBar = () => {
+
+  const authContext = useContext(AuthContext)
+
   return (
     <div className="main-header">
         <div className="container-fluid">
@@ -100,9 +105,18 @@ const NavBar = () => {
               <a href="#" className="main-header__cart-btn">
                 <ShoppingCartIcon sx={{ fontSize: 40 }}/>
               </a>
-              <a href="#" className="main-header__profile">
+
+              {authContext.isLoggedIn ? (
+               <Link to="#" className="main-header__profile">
+               <span className="main-header__profile-text">{authContext.userInfos.name}</span>
+              </Link>
+              ):(
+                <Link to="/login" className="main-header__profile">
                 <span className="main-header__profile-text">ورود/ثبت نام</span>
-              </a>
+                </Link>
+              )
+            }
+              
             </div>
           </div>
         </div>

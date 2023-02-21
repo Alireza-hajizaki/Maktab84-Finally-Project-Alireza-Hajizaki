@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './App.css';
 import {useRoutes} from "react-router-dom";
 import routes from './router';
@@ -10,15 +10,33 @@ function App() {
   const [token , setToken] = useState(false)
   const [userInfos , setUserInfos] = useState({})
 
-  const login =(token) => {
+  const login =useCallback((userInfo, token) => {
     setToken(token)
+    setIsLoggedIn(true)
+    setUserInfos(userInfo)
     localStorage.setItem('user' , JSON.stringify({token}))
-  }
-  const logout = () =>{
+  },[])
+  const logout = useCallback(() =>{
     setToken(null)
     setUserInfos({})
     localStorage.removeItem('user')
-  }
+  },[])
+
+  useEffect(() =>{
+    const localStorageData = JSON.parse(localStorage.getItem('user'));
+    if(localStorageData){
+      fetch(`http://localhost:3001/v1/auth/me`,{
+        headers:{
+          Authorization : `Bearer ${localStorageData.token}`
+        },
+      }).then(res => res.json())
+      .then(userData => {
+        setIsLoggedIn(true)
+        setUserInfos(userData)
+      })
+    }
+    console.log(localStorageData);
+  } ,[login])
 
   const router = useRoutes(routes)
 

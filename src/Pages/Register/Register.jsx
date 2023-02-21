@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Register.css';
 import Header from "../../Layout/Header/Header";
 import Footer from "../../Layout/Footer/Footer";
@@ -7,8 +7,13 @@ import Input from "../../Compnents/Form/Input"
 import Button from "../../Compnents/Form/Button"
 import { requiredValidator, minValidator, maxValidator, emailValidator } from "../../validators/rulse"; 
 import {useForm} from '../../Hook/useForm'
+import AuthContext from '../../Context/authContext';
 
 const Register = () => {
+
+  const authContext = useContext(AuthContext);
+  console.log(authContext);
+
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -49,9 +54,12 @@ const Register = () => {
     },
     body: JSON.stringify(newUserInfos),
   }).then(res => res.json())
-  .then(result => console.log(result)) 
+  .then(result =>
+    { console.log(result)
+     authContext.login(result.user ,result.accessToken)
+}) 
 
-    console.log("User Register");
+  // console.log("User Register");
   };
 
   return (

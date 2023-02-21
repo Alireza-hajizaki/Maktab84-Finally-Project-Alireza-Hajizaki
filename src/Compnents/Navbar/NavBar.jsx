@@ -1,5 +1,5 @@
 import "./NavBar.css"
-import React, { useContext } from 'react';
+import React, { useContext ,useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -8,7 +8,17 @@ import {Link} from 'react-router-dom';
 
 const NavBar = () => {
 
-  const authContext = useContext(AuthContext)
+  const [allMenus, setAllMenus] = useState([]);
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/v1/menus`)
+      .then((res) => res.json())
+      .then((menus) => {
+        console.log(menus);
+        setAllMenus(menus);
+      });
+  }, []);
 
   return (
     <div className="main-header">
@@ -19,82 +29,35 @@ const NavBar = () => {
 
               <ul className="main-header__menu">
                 <li className="main-header__item">
-                  <a href="#" className="main-header__link">صفحه اصلی</a>
+                  <Link to="/" className="main-header__link">صفحه اصلی</Link>
                 </li>
 
+                {allMenus.map((menu) => (
                 <li className="main-header__item">
-                  <a href="#" className="main-header__link">فرانت اند
-                    <KeyboardArrowDownIcon fontSize='large'/>
-                    <ul className="main-header__dropdown">
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش Html</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش Css</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش جاوا اسکریپت</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش FlexBox</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش جامع ری‌اکت</a>
-                      </li>
-                    </ul>
-                  </a>
+                  <Link to={menu.href} className="main-header__link">
+                    {menu.title}
+                    {menu.submenus.length !== 0 && (
+                      <>
+                        <KeyboardArrowDownIcon fontSize='large'/>
+                        <ul className="main-header__dropdown">
+                          {menu.submenus.map((submenu) => (
+                            <li className="main-header__dropdown-item">
+                              <Link
+                                to={submenu.href}
+                                className="main-header__dropdown-link"
+                              >
+                               {
+                                 submenu.title
+                               }
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </Link>
                 </li>
-                <li className="main-header__item">
-                  <a href="#" className="main-header__link">امنیت
-                  <KeyboardArrowDownIcon fontSize='large'/>
-                    <ul className="main-header__dropdown">
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش کالی لینوکس</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش پایتون سیاه</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش جاوا اسکریپت سیاه</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">آموزش شبکه</a>
-                      </li>
-                    </ul>
-                  </a>
-                </li>
-                <li className="main-header__item">
-                  <a href="#" className="main-header__link">مقالات
-                  <KeyboardArrowDownIcon fontSize='large'/>
-                    <ul className="main-header__dropdown">
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">توسعه وب</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">جاوا اسکریپت</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">فرانت اند</a>
-                      </li>
-                    </ul>
-                  </a>
-                </li>
-                <li className="main-header__item">
-                  <a href="#" className="main-header__link">پایتون
-                   <KeyboardArrowDownIcon fontSize='large'/>
-                    <ul className="main-header__dropdown">
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">دوره متخصص پایتون</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">دوره هوش مصنوعی با پایتون</a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">دوره متخصص جنگو</a>
-                      </li>
-                    </ul>
-                  </a>
-                </li>
+              ))}
               </ul>
             </div>
 

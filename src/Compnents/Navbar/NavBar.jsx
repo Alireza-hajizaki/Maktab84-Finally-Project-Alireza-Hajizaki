@@ -1,7 +1,7 @@
 import "./NavBar.css"
 import React, { useContext ,useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import SearchIcon from '@mui/icons-material/Search';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AuthContext from '../../Context/authContext'
 import {Link} from 'react-router-dom';
@@ -61,9 +61,9 @@ const NavBar = () => {
             </div>
 
             <div className="main-header__left">
-              <a href="#" className="main-header__search-btn">
-                <SearchIcon sx={{ fontSize: 40 }} />
-              </a>
+              <Link to="/p-admin" className="main-header__search-btn">
+                <AdminPanelSettingsIcon sx={{ fontSize: 40 }}/>
+              </Link>
               <a href="#" className="main-header__cart-btn">
                 <ShoppingCartIcon sx={{ fontSize: 40 }}/>
               </a>

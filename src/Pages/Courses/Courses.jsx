@@ -14,6 +14,9 @@ const Courses = () => {
 
   const [courses , setCourses] = useState([])
   const [shownCourses , setShownCourses] = useState([])
+  const [status, setStatus] = useState('default')
+  const [statusTitle, setStatusTitle] = useState('مرتب سازی پیش فرض')
+  const [orderedCourses , setOrderCourses] = useState([])
 
   useEffect(()=>{
     const localStorageData = JSON.parse(localStorage.getItem('user'));
@@ -23,8 +26,42 @@ const Courses = () => {
       "Authorization" : `Bearer ${localStorageData.token}`
       },
     }).then(res => res.json())
-    .then(data => setCourses(data))
+    .then(data => {
+      setCourses(data)
+      setOrderCourses(data)})
   } ,[])
+
+  useEffect(() => {
+    switch (status) {
+      case 'free': {
+        const freeCourses = courses.filter(course => course.price === 0)
+        setOrderCourses(freeCourses)
+        break
+      }
+      case 'money': {
+        const notFreeCourses = courses.filter(course => course.price !== 0)
+        setOrderCourses(notFreeCourses)
+        break
+      }
+      case 'last': {
+        setOrderCourses(courses)
+        break
+      }
+      case 'first': {
+        const reversedCourses = courses.slice().reverse()
+        setOrderCourses(reversedCourses)
+        break
+      }
+      default:{
+        setOrderCourses(courses)
+      }
+        break;
+    }
+  } ,[status])
+
+  const titleChangeHandler = (e) => {
+    setStatusTitle(e.target.textContent)
+  }
 
   return (
     <div>
@@ -50,16 +87,40 @@ const Courses = () => {
         
           <div className="courses-top-bar__selection">
             <span className="courses-top-bar__selection-title">
-               مرتب سازی پیش فرض
+               {statusTitle}
                <KeyboardArrowDownIcon/>
              </span>
              <ul className="courses-top-bar__selection-list">
-               <li className="courses-top-bar__selection-item courses-top-bar__selection-item--active">مرتب سازی پیش فرض</li>
-               <li className="courses-top-bar__selection-item">مربت سازی بر اساس محبوبیت</li>
-               <li className="courses-top-bar__selection-item">مربت سازی بر اساس امتیاز</li>
-               <li className="courses-top-bar__selection-item">مربت سازی بر اساس آخرین</li>
-               <li className="courses-top-bar__selection-item">مربت سازی بر اساس ارزان ترین</li>
-               <li className="courses-top-bar__selection-item">مربت سازی بر اساس گران ترین</li>
+               <li className="courses-top-bar__selection-item courses-top-bar__selection-item--active" onClick={(e) =>{
+                setStatus('مرتب سازی پیش فرض')
+                titleChangeHandler(e)
+                }}>
+                مرتب سازی پیش فرض
+               </li>
+               <li className="courses-top-bar__selection-item" onClick={(e) =>{
+                setStatus('free')
+                titleChangeHandler(e)
+                }}>
+                مرتب سازی دوره های رایگان
+                </li>
+               <li className="courses-top-bar__selection-item" onClick={(e) =>{
+                setStatus('money')
+                titleChangeHandler(e)
+                }}>
+                مرتب سازی دوره های پولی
+                </li>
+               <li className="courses-top-bar__selection-item" onClick={(e) =>{
+                setStatus('last')
+                titleChangeHandler(e)
+                }}>
+                مرتب سازی بر اساس آخرین
+                </li>
+               <li className="courses-top-bar__selection-item" onClick={(e) =>{
+                setStatus('first')
+                titleChangeHandler(e)
+                }}>
+                مرتب سازی بر اساس اولین
+                </li>
             </ul>
           </div>
         </div>
@@ -84,7 +145,7 @@ const Courses = () => {
           </div>
 
           <Pagination
-          items = {courses}
+          items = {orderedCourses}
           itemsCount = {3}
           pathname="/courses"
           setShownCourses={setShownCourses}

@@ -43,13 +43,28 @@ const Category = () => {
                 <KeyboardArrowDownIcon/>
               </span>
               <ul className="courses-top-bar__selection-list">
-                <li className="courses-top-bar__selection-item courses-top-bar__selection-item--active">مرتب سازی پیش فرض</li>
-                <li className="courses-top-bar__selection-item">مربت سازی بر اساس محبوبیت</li>
-                <li className="courses-top-bar__selection-item">مربت سازی بر اساس امتیاز</li>
-                <li className="courses-top-bar__selection-item">مربت سازی بر اساس آخرین</li>
-                <li className="courses-top-bar__selection-item">مربت سازی بر اساس ارزان ترین</li>
-                <li className="courses-top-bar__selection-item">مربت سازی بر اساس گران ترین</li>
-              </ul>
+               <li className="courses-top-bar__selection-item courses-top-bar__selection-item--active">
+                مرتب سازی پیش فرض
+               </li>
+               <li className="courses-top-bar__selection-item">
+                مرتب سازی بر اساس دوره های رایگان
+                </li>
+               <li className="courses-top-bar__selection-item">
+                مرتب سازی بر اساس دوره های پولی
+                </li>
+               <li className="courses-top-bar__selection-item">
+                مرتب سازی بر اساس آخرین
+                </li>
+               <li className="courses-top-bar__selection-item">
+                مرتب سازی بر اساس اولین
+                </li>
+               <li className="courses-top-bar__selection-item">
+                مرتب سازی بر اساس ارزان ترین
+                </li>
+               <li className="courses-top-bar__selection-item">
+                مرتب سازی بر اساس گران ترین
+                </li>
+            </ul>
             </div>
           </div>
 

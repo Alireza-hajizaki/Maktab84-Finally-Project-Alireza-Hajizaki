@@ -39,7 +39,7 @@ const LatestCourses = () => {
 
         
       <div>
-      <Link to='/courses' className='courses__gtl'>تمامی دوره ها</Link>
+      <Link to='/courses/1' className='courses__gtl'>تمامی دوره ها</Link>
       </div>
 
     </div>

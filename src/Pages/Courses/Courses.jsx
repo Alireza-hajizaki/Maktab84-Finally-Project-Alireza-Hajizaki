@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 const Courses = () => {
 
   const [courses , setCourses] = useState([])
+  const [shownCourses , setShownCourses] = useState([])
 
   useEffect(()=>{
     const localStorageData = JSON.parse(localStorage.getItem('user'));
@@ -75,14 +76,19 @@ const Courses = () => {
           <div className="courses-content">
             <div className="container">
               <div className="row">
-                {courses.map(course =>(
+                {shownCourses.map(course =>(
                   <CourseBox {...course}/>
                 ))}
               </div>
             </div>
           </div>
 
-          <Pagination/>
+          <Pagination
+          items = {courses}
+          itemsCount = {3}
+          pathname="/courses"
+          setShownCourses={setShownCourses}
+          />
           
         </div>
 </section>

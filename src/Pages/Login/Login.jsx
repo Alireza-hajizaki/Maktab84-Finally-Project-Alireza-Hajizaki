@@ -70,8 +70,6 @@ const Login = () => {
           button: "تلاش دوباره"
         })
       });
-
-    console.log('User Login');
   }
 
   return (

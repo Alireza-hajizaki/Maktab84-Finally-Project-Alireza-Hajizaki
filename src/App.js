@@ -8,7 +8,10 @@ import AuthContext from './Context/authContext';
 function App() {
   const [isLoggedIn , setIsLoggedIn] = useState(false)
   const [token , setToken] = useState(false)
+  const [role , setRole] = useState('')
   const [userInfos , setUserInfos] = useState({})
+  
+ 
 
   const login =useCallback((userInfo, token) => {
     setToken(token)
@@ -16,6 +19,7 @@ function App() {
     setUserInfos(userInfo)
     localStorage.setItem('user' , JSON.stringify({token}))
   },[])
+
   const logout = useCallback(() =>{
     setToken(null)
     setUserInfos({})
@@ -33,9 +37,12 @@ function App() {
       .then(userData => {
         setIsLoggedIn(true)
         setUserInfos(userData)
+        setRole(userData.role)
       })
+    }else{
+      setIsLoggedIn(false)
     }
-  } ,[login])
+  } ,[login , logout])
 
   const router = useRoutes(routes)
 
@@ -47,6 +54,7 @@ function App() {
     <AuthContext.Provider value={{
        isLoggedIn : isLoggedIn,
        token: token,
+       role: role,
        userInfos: userInfos,
        login,
        logout,

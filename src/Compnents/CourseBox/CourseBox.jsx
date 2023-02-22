@@ -1,15 +1,17 @@
 import React from 'react';
 import "./CourseBox.css";
+import {Link} from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const CourseBox = () => {
+const CourseBox = ({name, cover,shortName,price}) => {
   return (
     <div className="col-4">
      <div className="course-box">
-      <a href="#">
-        <img src="/images/courses/fareelancer.png" alt="Course img" className="course-box__img" />
-      </a>
+      <Link to ={`/course-info/${shortName}`}>
+        <img src={cover} alt="Course img" className="course-box__img" />
+      </Link>
       <div className="course-box__main">
-        <a href="#" className="course-box__title">دوره پروژه محور متخصص جنگو</a>
+        <Link to ={`/course-info/${shortName}`} className="course-box__title">{name}</Link>
 
         <div className="course-box__rating-teacher">
           <div className="course-box__teacher">
@@ -30,15 +32,17 @@ const CourseBox = () => {
             <i className="fas fa-users course-box__users-icon"></i>
             <span className="course-box__users-text">500</span>
           </div>
-          <span className="course-box__price">1,000,000</span>
+          <span className="course-box__price">
+            {price === 0 ? 'رایگان' : price.toLocaleString()}
+          </span>
         </div>
       </div>
 
       <div className="course-box__footer">
-        <a href="#" className="course-box__footer-link">
+        <Link to ={`/course-info/${shortName}`} className="course-box__footer-link">
           مشاهده اطلاعات
-          <i className="fas fa-arrow-left course-box__footer-icon"></i>
-        </a>
+          <ArrowBackIcon/>
+        </Link>
       </div>
 
      </div>

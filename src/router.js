@@ -9,6 +9,7 @@ import AdminPanel from "./Pages/AdminPanel/index"
 import Users from "./Pages/AdminPanel/Users/Users";
 import AdminCourses from "./Pages/AdminPanel/Courses/Courses";
 import AdminArticle from "./Pages/AdminPanel/Articles/Articles";
+import NotFound from './Pages/NotFound/NotFound'
 
 
 const routes =[
@@ -19,10 +20,11 @@ const routes =[
   { path: "/courses" , element: <Courses/> },
   { path: "/login" , element: <Login/> },
   { path: "/register" , element: <Register/> },
+  { path: '/not-found', element:<NotFound/>},
   { path: "/p-admin/*", element: <AdminPanel />, children:[
     {path: 'users' , element: <Users/>},
     {path: 'courses', element: <AdminCourses/>},
-    {path: 'menus', element: <AdminArticle/>}
+    {path: 'articles', element: <AdminArticle/>}
   ] }
 ]
 

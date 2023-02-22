@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './Sidebar.css'
 
 export default function Sidebar() {
@@ -6,26 +7,25 @@ export default function Sidebar() {
     <div id="sidebar" class="col-2">
       <div class="sidebar-header">
         <div class="sidebar-logo">
-          <a href="#">
-            <img src="/images/logo/Logo.png" alt="Logo" />
-          </a>
+          <Link to="/">
+            <img src="/images/logo/Logo-1.png" alt="Logo" className="sidebar_logo"/>
+          </Link>
         </div>
 
         <div class="sidebar-menu-btn">
-          <i class="fas fa-bars"></i>
         </div>
       </div>
       <div class="sidebar-menu">
         <ul>
           <li class="active-menu">
-            <a href="#">
+            <Link to="/p-admin">
               <span>صفحه اصلی</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to="courses">
               <span>دوره ها</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#">
@@ -33,14 +33,14 @@ export default function Sidebar() {
             </a>
           </li>
           <li>
-            <a href="#">
+            <Link to="articles">
               <span>مقاله ها</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to="users">
               <span>کاربران</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#">

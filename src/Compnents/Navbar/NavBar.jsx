@@ -19,6 +19,8 @@ const NavBar = () => {
       });
   }, []);
 
+  const userRole = authContext.role
+
   return (
     <div className="main-header">
         <div className="container-fluid">
@@ -61,7 +63,7 @@ const NavBar = () => {
             </div>
 
             <div className="main-header__left">
-              <Link to="/p-admin" className="main-header__search-btn">
+              <Link to={userRole == 'ADMIN' ? ("/p-admin"):('/not-found')} className="main-header__search-btn">
                 <AdminPanelSettingsIcon sx={{ fontSize: 40 }}/>
               </Link>
               <a href="#" className="main-header__cart-btn">

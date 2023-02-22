@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import SearchIcon from '@mui/icons-material/Search';
+import { pink } from '@mui/material/colors';
 
 export default function Topbar() {
 
@@ -15,7 +17,10 @@ export default function Topbar() {
             setAdminInfo(data)
         })
     } ,[])
-    
+
+    const onCheangHandler = (e) =>{
+      console.log(e.target.value);
+    }
 
   return (
     <div className="container-fluid">
@@ -23,7 +28,8 @@ export default function Topbar() {
         <div className="home-header">
           <div className="home-right">
             <div className="home-searchbar">
-              <input type="text" className="search-bar" placeholder="جستجو..." />
+              <input type="text" className="search-bar" placeholder="جستجو..." onChange={onCheangHandler}/>
+              <SearchIcon fontSize="larg"  sx={{ color: pink[50] }} style={{paddingLeft:"5px"}}/>
             </div>
             <div className="home-notification">
               <button type="button">

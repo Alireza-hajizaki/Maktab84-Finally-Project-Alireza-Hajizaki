@@ -201,15 +201,17 @@
   }
   #home .home-header .home-right .home-searchbar {
     position: relative;
+    background-color: #20294d;
   }
   #home .home-header .home-right .home-searchbar .search-bar {
-    background-color: #20294d;
     border: none;
     border-radius: 5px;
     width: 250px;
     font-size: 13px;
     padding: 7px 20px;
     color: white;
+    background-color: none;
+    background-color: #20294d;
   }
   #home
     .home-header

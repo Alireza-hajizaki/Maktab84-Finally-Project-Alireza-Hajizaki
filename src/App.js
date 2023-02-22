@@ -39,8 +39,10 @@ function App() {
         setUserInfos(userData)
         setRole(userData.role)
       })
+    }else{
+      setIsLoggedIn(false)
     }
-  } ,[login])
+  } ,[login , logout])
 
   const router = useRoutes(routes)
 

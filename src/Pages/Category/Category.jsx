@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Category.css';
 import Footer from '../../Layout/Footer/Footer';
 import Header from '../../Layout/Header/Header';
@@ -8,8 +8,19 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import BorderAllIcon from '@mui/icons-material/BorderAll';
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import SearchIcon from '@mui/icons-material/Search';
+import { useParams } from 'react-router-dom';
 
 const Category = () => {
+
+  const {categoryName} = useParams()
+  const [courses , setCourses] = useState([])
+
+  useEffect(()=>{
+    fetch('http://localhost:3001/v1/courses/category/frontend',)
+    .then(res => res.json())
+    .then(data => console.log(data))
+  } ,[])
+
   return (
     <div>
       <Header/>
@@ -54,9 +65,9 @@ const Category = () => {
           <div class="courses-content">
            <div class="container">
             <div class="row">
+             {/* <CourseBox/>
              <CourseBox/>
-             <CourseBox/>
-             <CourseBox/>
+             <CourseBox/> */}
             </div>
            </div>
           </div>

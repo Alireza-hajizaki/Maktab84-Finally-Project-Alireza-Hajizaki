@@ -12,7 +12,6 @@ import AuthContext from '../../Context/authContext';
 const Register = () => {
 
   const authContext = useContext(AuthContext);
-  console.log(authContext);
 
   const [formState, onInputHandler] = useForm(
     {

@@ -17,7 +17,7 @@ const Courses = () => {
   const [status, setStatus] = useState('default')
   const [statusTitle, setStatusTitle] = useState('مرتب سازی پیش فرض')
   const [orderedCourses , setOrderCourses] = useState([])
-
+  const [searchValue , setSearchValue] = useState('')
   useEffect(()=>{
     const localStorageData = JSON.parse(localStorage.getItem('user'));
     fetch('http://localhost:3001/v1/courses',{
@@ -31,6 +31,8 @@ const Courses = () => {
       setOrderCourses(data)})
   } ,[])
 
+
+  // sorting
   useEffect(() => {
     switch (status) {
       case 'free': {
@@ -61,6 +63,13 @@ const Courses = () => {
 
   const titleChangeHandler = (e) => {
     setStatusTitle(e.target.textContent)
+  }
+
+  //searching
+  const searchValueChangeHandler = (e) =>{
+    setSearchValue(e.target.value)
+    const filteredCourses = courses.filter((course) => course.name.includes(e.target.value)) ;
+    setOrderCourses(filteredCourses)
   }
 
   return (
@@ -127,7 +136,13 @@ const Courses = () => {
 
         <div className="courses-top-bar__left">
           <form action="#" className="courses-top-bar__form">
-            <input type="text" className="courses-top-bar__input" placeholder="جستجوی دوره ..." />
+            <input 
+            type="text" 
+            className="courses-top-bar__input" 
+            placeholder="جستجوی دوره ..." 
+            value={searchValue}
+            onChange={searchValueChangeHandler}
+            />
             <SearchIcon fontSize='large' className='courses-top-bar__search-icon'/>
           </form>
         </div>

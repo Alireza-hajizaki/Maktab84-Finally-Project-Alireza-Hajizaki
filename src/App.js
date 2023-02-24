@@ -12,7 +12,6 @@ function App() {
   const [userInfos , setUserInfos] = useState({})
   
  
-
   const login =useCallback((userInfo, token) => {
     setToken(token)
     setIsLoggedIn(true)
@@ -47,7 +46,6 @@ function App() {
   const router = useRoutes(routes)
 
   const courses = useSelector((store) => store.courseInfo)
-  console.log(courses)
 
   return (
     <div className='App'>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import "./Login.css";
 import Header from "../../Layout/Header/Header";
 import Footer from "../../Layout/Footer/Footer";
-import {Link , Navigate, useNavigate} from 'react-router-dom';
+import {Link , useNavigate} from 'react-router-dom';
 import Input from "../../Compnents/Form/Input"
 import Button from "../../Compnents/Form/Button"
 import { requiredValidator, minValidator, maxValidator, emailValidator } from "../../validators/rulse"; 
@@ -61,7 +61,10 @@ const Login = () => {
           title:"با موفقیت لاگین شدید",
           icon: 'success',
           button: "ورود به پنل کاربری"
-        }).then(value => navigate('/'))
+        }).then(value => {
+          navigate('/')
+          window.location.reload(false)
+        })
       })
       .catch((err) => {
         swal({

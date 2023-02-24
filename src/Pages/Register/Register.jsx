@@ -54,12 +54,10 @@ const Register = () => {
     body: JSON.stringify(newUserInfos),
   }).then(res => res.json())
   .then(result =>
-    { console.log(result)
+    {
      authContext.login(result.user ,result.accessToken)
 }) 
-
-  // console.log("User Register");
-  };
+};
 
   return (
     <div>

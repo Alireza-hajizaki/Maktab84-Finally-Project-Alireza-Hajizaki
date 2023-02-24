@@ -10,13 +10,15 @@ const LatestCourses = () => {
 
   useEffect(()=>{
     const localStorageData = JSON.parse(localStorage.getItem('user'));
-    fetch('http://localhost:3001/v1/courses',{
-      method:'GET',
-      headers:{
-      "Authorization" : `Bearer ${localStorageData.token}`
-      },
-    }).then(res => res.json())
-    .then(data => setCourses(data))
+   if(localStorageData){
+     fetch('http://localhost:3001/v1/courses',{
+       method:'GET',
+       headers:{
+       "Authorization" : `Bearer ${localStorageData.token}`
+       },
+     }).then(res => res.json())
+     .then(data => setCourses(data))
+   }
   } ,[])
 
   return (

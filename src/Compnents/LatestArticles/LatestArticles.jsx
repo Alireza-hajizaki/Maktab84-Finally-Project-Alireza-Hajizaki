@@ -1,42 +1,43 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import ArticleBox from '../ArticleBox/ArticleBox';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import axios from 'axios';
 
 const LatestArticles = () => {
-  return (
-    <div>
-        <section className="articles">
-          <div className="container">
-            <SectionHeader title='جدیدترین مقاله ها'/>
 
-            <div className="articles__content">
-              <div className="row">
-                <div className='col-4'>
-                <ArticleBox
-                title="نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون"
-                desc="زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع..."
-                img="images/blog/3.jpg"
-                />
-                </div>
-                <div className='col-4'>
-                <ArticleBox
-                title="نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون"
-                desc="زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع..."
-                img="images/blog/3.jpg"
-                />
-                </div>
-                <div className='col-4'>
-                <ArticleBox
-                title="نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون"
-                desc="زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع..."
-                img="images/blog/3.jpg"
-                />
-                </div>
+  const [articles , setArticles] = useState([])
+
+  useEffect(()=>{
+      const localStorageData = JSON.parse(localStorage.getItem('user'))
+      axios.get('http://localhost:3001/v1/articles',{
+          headers:{
+              "Authorization" : `Bearer ${localStorageData.token}`
+          }
+      })
+          .then(res => res.data)
+          .then(data => setArticles(data))
+          .catch(err => console.log(err))
+  } ,[])
+
+
+  return (
+      <div>
+          <section className="articles">
+              <div className="container">
+                  <SectionHeader title='جدیدترین مقاله ها'/>
+
+                  <div className="articles__content">
+                      <div className="row">
+                          {articles.slice(0,3).map((article) => (
+                              <div className='col-4'>
+                                  <ArticleBox {...article}/>
+                              </div>
+                          ))}
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-        </section>
-    </div>
+          </section>
+      </div>
   )
 }
 

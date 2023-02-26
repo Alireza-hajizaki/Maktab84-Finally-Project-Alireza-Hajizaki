@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState , useEffect} from 'react';
 import './ArticleInfo.css';
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
@@ -9,60 +9,95 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CommentTextArea from '../../Compnents/CommentTextArea/CommentTextArea';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 const ArticleInfo = () => {
-  return (
+const [article , setArticle] = useState({})
+const [articleCategoey , setArticleCategoey] = useState({})
+const [articleCreator , setArticleCreator] = useState({})
+const {articleName} = useParams()
+
+useEffect(()=>{
+    const localStorageData = JSON.parse(localStorage.getItem('user'))
+    axios.get(`http://localhost:3001/v1/articles/${articleName}`,{
+        headers:{
+            "Authorization" : `Bearer ${localStorageData.token}`
+        }
+    })
+        .then(res => res.data)
+        .then(data => {
+            setArticle(data)
+            setArticleCreator(data.creator)
+            setArticleCategoey(data.categoryID)
+        })
+        .catch(err => console.log(err))
+} ,[])
+
+console.log(article);
+console.log(articleCreator);
+
+
+return (
     <div>
-      <Header/>
-      <Breadcrumb
-      links={[
-        {id:1 , title:'خانه', to:''},
-        {id:2 , title:'مقاله ها', to:'article-info/articles'},
-        {id:3 , title:'ری اکت vs جاوا', to:'article-info/js vs vue'},
-      ]}
-      />
+        <Header/>
+        <Breadcrumb
+            links={[
+                {id:1 , title:'خانه', to:''},
+                {id:2 , title:'مقاله ها', to:'article-info/articles'},
+                {id:3 , title:`${articleName}`, to:`article-info/${articleName}`},
+            ]}
+        />
 
-<main className="main">
-        <div className="container">
-          <div className="row">
+ <main className="main">
+     <div className="container">
+        <div className="row">
             <div className='col-8'>
-            <div className="article">
-                <h1 className="article__title">
-                  معرفی بهترین سایت آموزش جاوا اسکریپت [ تجربه محور ] + آموزش رایگان
-                </h1>
-                <div className="article__header">
-                  <div className="article-header__category article-header__item">
-                    <i className="far fa-folder article-header__icon"></i>
-                    <a href="#" className="article-header__text">جاوا اسکریپت</a>
-                  </div>
-                  <div className="article-header__category article-header__item">
-                    <i className="far fa-user article-header__icon"></i>
-                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
-                  </div>
-                  <div className="article-header__category article-header__item">
-                    <i className="far fa-clock article-header__icon"></i>
-                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
-                  </div>
-                  <div className="article-header__category article-header__item">
-                    <i className="far fa-eye article-header__icon"></i>
-                    <span className="article-header__text">  2.14k بازدید</span>
-                  </div>
-                </div>
-                <img src="/images/blog/1.jpg" alt="Article Cover" className="article__banner" />
-                <div className="article__score">
-                  <div className="article__score-icons">
-                    <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
-                    <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
-                    <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
-                    <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
-                    <img src="/images/svgs/star.svg" className="article__score-icon" />
-                  </div>
-                  <span className="article__score-text">4.2/5 - (5 امتیاز)</span>
-                </div>
+                <div className="article">
+                     <h1 className="article__title">
+                         {article.title}
+                     </h1>
+                     <div className="article__header">
+                         <div className="article-header__category article-header__item">
+                             <i className="far fa-folder article-header__icon"></i>
+                             <a href="#" className="article-header__text">{article.title}</a>
+                         </div>
+                         <div className="article-header__category article-header__item">
+                             <i className="far fa-clock article-header__icon"></i>
+                             <span className="article-header__text">
+                               ارسال شده توسط
+                                {" "}
+                                {articleCreator.username}
+                            </span>
+                        </div>
+                        <div className="article-header__category article-header__item">
+                            <i className="far fa-eye article-header__icon"></i>
+                            <span className="article-header__text">
+                             تاریخ انتشار:
+                                {articleCreator.createdAt}
+                            </span>
+                         </div>
+                         <div className="article-header__category article-header__item">
+                             <i className="far fa-eye article-header__icon"></i>
+                             <span className="article-header__text">  2.14k بازدید</span>
+                         </div>
+                     </div>
+                     <img src={article.cover} alt="Article Cover" className="article__banner" />
+                     <div className="article__score">
+                        <div className="article__score-icons">
+                            <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
+                            <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
+                            <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
+                            <img src="/images/svgs/star_fill.svg" className="article__score-icon" />
+                            <img src="/images/svgs/star.svg" className="article__score-icon" />
+                        </div>
+                        <span className="article__score-text">4.2/5 - (5 امتیاز)</span>
+                    </div>
 
-                <p className="article__paragraph paragraph">
-                  جاوا اسکریپت یکی از زبان‌های برنامه‌نویسی اصلی حوزه فرانت‌اند است که به واسطه فریم ورک‌های آن می‌توان انواع وب سایت‌ها، اپلیکیشن‌ها و وب اپلیکیشن‌ها را طراحی کرد. به طور کلی بعد از یادگیری html و css معمولاً باید آموزش جاوا اسکریپت را نیز فرا بگیرید. . چرا که این زبان تکمیل‌کننده html و css بوده و در چنین شرایطی موقعیت‌های شغلی بیشتر را در اختیار خواهید داشت و همچنین می‌توانید پروژه‌های گسترده‌تری را انجام دهید. در حال حاضر با وجود منابع رایگان موجود در وب شما به راحتی می‌توانید زبان جاوا اسکریپت را به صورت حرفه‌ای فرا بگیرید. به همین واسطه در ادامه مطلب قصد داریم سایت‌های شاخص آموزش این زبان برنامه‌نویسی در جهان را به شما معرفی کنیم و در آخر بگوییم که بهترین سایت آموزش جاوا اسکریپت کدام است.
-                </p>
+                    <p className="article__paragraph paragraph">
+                        {article.description}
+                    </p>
 
                 <div className="article-read">
                   <span className="article-read__title">آنچه در این مقاله خواهید خواند</span>

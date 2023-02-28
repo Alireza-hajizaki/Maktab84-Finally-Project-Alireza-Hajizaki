@@ -8,7 +8,7 @@ const CourseBox = ({name, cover,shortName,price}) => {
     <div className="col-4">
      <div className="course-box">
       <Link to ={`/course-info/${shortName}`}>
-        <img src={`images/courses/${cover}`} alt="Course img" className="course-box__img" />
+        <img src={`/images/courses/${cover}`} alt="Course img" className="course-box__img" />
       </Link>
       <div className="course-box__main">
         <Link to ={`/course-info/${shortName}`} className="course-box__title">{name}</Link>

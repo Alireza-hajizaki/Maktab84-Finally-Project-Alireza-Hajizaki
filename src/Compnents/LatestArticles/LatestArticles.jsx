@@ -9,14 +9,16 @@ const LatestArticles = () => {
 
   useEffect(()=>{
       const localStorageData = JSON.parse(localStorage.getItem('user'))
-      axios.get('http://localhost:3001/v1/articles',{
-          headers:{
-              "Authorization" : `Bearer ${localStorageData.token}`
-          }
-      })
-          .then(res => res.data)
-          .then(data => setArticles(data))
-          .catch(err => console.log(err))
+      if(localStorageData){
+          axios.get('http://localhost:3001/v1/articles',{
+              headers:{
+                  "Authorization" : `Bearer ${localStorageData.token}`
+              }
+          })
+              .then(res => res.data)
+              .then(data => setArticles(data))
+              .catch(err => console.log(err))
+      }
   } ,[])
 
 

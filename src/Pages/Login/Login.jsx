@@ -60,7 +60,7 @@ const Login = () => {
         swal({
           title:"با موفقیت لاگین شدید",
           icon: 'success',
-          button: "ورود به پنل کاربری"
+          button: "ورود به صفحه ی اصلی "
         }).then(value => {
           navigate('/')
           window.location.reload(false)

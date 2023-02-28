@@ -18,6 +18,7 @@ export default function Sidebar() {
     }).then(() =>{
       authContext.logout()
       navigate('/')
+      window.location.reload(false)
     })
   }
   

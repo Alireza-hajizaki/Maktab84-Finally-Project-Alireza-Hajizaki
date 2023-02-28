@@ -1,0 +1,82 @@
+.total_container{
+  margin-bottom: 10rem;
+}
+.content-header {
+    border-top: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding: 1rem 0;
+  }
+  .content-header__title {
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    font-weight: bold;
+    font-size: 2.3rem;
+    padding: 0.5rem 2rem;
+  }
+  /* ============================== Content Header Style ============================== */
+  
+  /* ============================== Content Sidebar Style ============================== */
+  .content-main {
+    margin: 3rem 0;
+  }
+  .sidebar{
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .sidebar__name {
+    color: var(--dark-color);
+    font-size: 1.7rem;
+  }
+  .sidebar__list {
+    margin-top: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .sidebar__link {
+    display: block;
+    padding: 1rem 0;
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  /* ============================== Content Sidebar Style ============================== */
+  
+  /* ============================== Content Main Style ============================== */
+  .main {
+    border-right: 2px solid #2bce56;
+    padding-right: 3rem;
+  }
+  .main__title-text {
+    font-size: 1.7rem;
+  }
+  .main__title-name {
+    color: #2bce56;
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  .main__title-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .main__desc {
+    margin: 2.3rem 0 2rem 0;
+  }
+  .main__link {
+    display: block;
+    text-align: center;
+    padding: 1.5rem 0;
+    border: 1px solid #2bce56;
+    border-radius: 0.3rem;
+    margin-bottom: 1.5rem;
+    transition: all 400ms ease;
+  }
+  .main__link:hover {
+    background-color: #2bce56;
+    color: var(--white-color);
+  }
+  /* ============================== Content Main Style ============================== */
+  
+ 

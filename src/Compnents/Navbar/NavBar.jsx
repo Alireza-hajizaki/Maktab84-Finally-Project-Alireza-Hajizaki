@@ -71,7 +71,7 @@ const NavBar = () => {
               </a>
 
               {authContext.isLoggedIn ? (
-               <Link to="#" className="main-header__profile">
+               <Link to={userRole == 'USER' ? ("/my-account"):('/not-found')} className="main-header__profile">
                <span className="main-header__profile-text">{authContext.userInfos.name}</span>
               </Link>
               ):(

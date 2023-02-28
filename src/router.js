@@ -9,7 +9,10 @@ import AdminPanel from "./Pages/AdminPanel/index"
 import Users from "./Pages/AdminPanel/Users/Users";
 import AdminCourses from "./Pages/AdminPanel/Courses/Courses";
 import AdminArticle from "./Pages/AdminPanel/Articles/Articles";
-import NotFound from './Pages/NotFound/NotFound'
+import NotFound from './Pages/NotFound/NotFound';
+import UserPanel from './Pages/UserPanel/index'
+import UserOrders from "./Pages/UserPanel/Orders/Orders";
+import UserCourses from './Pages/UserPanel/Courses/Courses'
 
 
 const routes =[
@@ -25,7 +28,11 @@ const routes =[
     {path: 'users' , element: <Users/>},
     {path: 'courses', element: <AdminCourses/>},
     {path: 'articles', element: <AdminArticle/>}
-  ] }
+  ]},
+  { path: "/my-account/*" , element: <UserPanel/>, children:[
+    {path: 'orders' , element: <UserOrders/>},
+    {path: 'courses' , element: <UserCourses/>},
+  ]}
 ]
 
 export default routes;

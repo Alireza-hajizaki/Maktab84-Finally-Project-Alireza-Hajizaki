@@ -2,16 +2,18 @@ import React, { useContext } from 'react';
 import './Register.css';
 import Header from "../../Layout/Header/Header";
 import Footer from "../../Layout/Footer/Footer";
-import {Link} from "react-router-dom";
+import {Link , useNavigate} from "react-router-dom";
 import Input from "../../Compnents/Form/Input"
 import Button from "../../Compnents/Form/Button"
 import { requiredValidator, minValidator, maxValidator, emailValidator } from "../../validators/rulse"; 
 import {useForm} from '../../Hook/useForm'
 import AuthContext from '../../Context/authContext';
+import swal from 'sweetalert';
 
 const Register = () => {
 
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const [formState, onInputHandler] = useForm(
     {
@@ -56,6 +58,13 @@ const Register = () => {
   .then(result =>
     {
      authContext.login(result.user ,result.accessToken)
+     swal({
+      title:"با موفقیت ثبت نام شدید",
+      icon: 'success',
+      button: "ورود به پنل کاربری"
+    }).then(value => {
+      navigate('/my-account')
+    })
 }) 
 };
 

@@ -12,7 +12,8 @@ import AdminArticle from "./Pages/AdminPanel/Articles/Articles";
 import NotFound from './Pages/NotFound/NotFound';
 import UserPanel from './Pages/UserPanel/index'
 import UserOrders from "./Pages/UserPanel/Orders/Orders";
-import UserCourses from './Pages/UserPanel/Courses/Courses'
+import UserCourses from './Pages/UserPanel/Courses/Courses';
+import UserArticles from './Pages/AdminPanel/Articles/Articles'
 
 
 const routes =[
@@ -32,6 +33,7 @@ const routes =[
   { path: "/my-account/*" , element: <UserPanel/>, children:[
     {path: 'orders' , element: <UserOrders/>},
     {path: 'courses' , element: <UserCourses/>},
+    {path: 'articles' , element: <UserArticles/>},
   ]}
 ]
 

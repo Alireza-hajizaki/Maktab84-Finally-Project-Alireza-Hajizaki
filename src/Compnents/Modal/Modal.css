@@ -1,0 +1,9 @@
+.container_modal{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.input_modal{
+    align-self: center;
+    width: 70%;
+}

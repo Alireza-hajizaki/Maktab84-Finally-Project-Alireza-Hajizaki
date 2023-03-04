@@ -1,25 +1,57 @@
 import React ,{useState,useEffect} from 'react'
 import DataTable from '../../../Compnents/AdminPanel/DataTable/DataTable'
+import swal from 'sweetalert';
+import axios from 'axios';
+import ModalEdit from '../../../Compnents/Modal/Modal';
+
 
 const Courses = () => {
 
   const [courses, setCourses] = useState([]);
+  const [show, setShow] = useState(false);
+  const [courseData , setCourseData] = useState([])
 
-  useEffect(() => {
+  useEffect(()=>{
     const localStorageData = JSON.parse(localStorage.getItem('user'))
-    fetch('http://localhost:3001/v1/courses',{
-      method:'GET',
-      headers:{
-         "Authorization" : `Bearer ${localStorageData.token}`
-      },
-    }).then(res => res.json())
-    .then(data => {
-      setCourses(data)
+    axios.get(`http://localhost:3001/v1/courses`,{
+        headers:{
+            "Authorization" : `Bearer ${localStorageData.token}`
+        }
     })
-  }, []);
+    .then(res => {
+      setCourses(res.data)
+    })
+} ,[])
+
+const removeUser = (courseId) => {
+  
+  swal({
+    title: "آیا از حذف مطمئنی؟",
+    icon: "warning",
+    buttons: ["نه","آره"]
+  }).then(resulte => {
+    if(resulte){
+      const newCourses = courses.filter(course => {
+      return course._id !== courseId
+      })
+      setCourses(newCourses)
+    }
+  })
+}
+
+const editUser = (e) => {
+  setShow(true)
+  setCourseData(e)
+}
+
 
   return (
     <div>
+      <ModalEdit 
+      show={show} 
+      setShow={setShow} 
+      value={courseData} 
+      />
       <DataTable title="دوره‌ها">
         <table className="table">
           <thead>
@@ -44,12 +76,12 @@ const Courses = () => {
                 <td>{course.shortName}</td>
                 <td>{course.creator.name}</td>
                 <td>
-                  <button type="button" className="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn" onClick={() => editUser(course)}>
                     ویرایش
                   </button>
                 </td>
                 <td>
-                  <button type="button" className="btn btn-danger delete-btn">
+                  <button type="button" className="btn btn-danger delete-btn" onClick={() => removeUser(course._id)}>
                     حذف
                   </button>
                 </td>

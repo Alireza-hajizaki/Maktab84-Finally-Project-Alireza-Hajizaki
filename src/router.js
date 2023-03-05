@@ -6,14 +6,15 @@ import Courses from "./Pages/Courses/Courses";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import AdminPanel from "./Pages/AdminPanel/index"
-import Users from "./Pages/AdminPanel/Users/Users";
+import AdminUsers from "./Pages/AdminPanel/Users/Users";
 import AdminCourses from "./Pages/AdminPanel/Courses/Courses";
 import AdminArticle from "./Pages/AdminPanel/Articles/Articles";
+import AdminCategory from './Pages/AdminPanel/Category/Category';
 import NotFound from './Pages/NotFound/NotFound';
 import UserPanel from './Pages/UserPanel/index'
 import UserOrders from "./Pages/UserPanel/Orders/Orders";
 import UserCourses from './Pages/UserPanel/Courses/Courses';
-import UserArticles from './Pages/AdminPanel/Articles/Articles'
+
 
 
 const routes =[
@@ -26,14 +27,14 @@ const routes =[
   { path: "/register" , element: <Register/> },
   { path: '/not-found', element:<NotFound/>},
   { path: "/p-admin/*", element: <AdminPanel />, children:[
-    {path: 'users' , element: <Users/>},
+    {path: 'users' , element: <AdminUsers/>},
     {path: 'courses', element: <AdminCourses/>},
-    {path: 'articles', element: <AdminArticle/>}
+    {path: 'articles', element: <AdminArticle/>},
+    {path: 'category', element: <AdminCategory/>},
   ]},
   { path: "/my-account/*" , element: <UserPanel/>, children:[
     {path: 'orders' , element: <UserOrders/>},
     {path: 'courses' , element: <UserCourses/>},
-    {path: 'articles' , element: <UserArticles/>},
   ]}
 ]
 

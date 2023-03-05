@@ -68,9 +68,9 @@ export default function Sidebar() {
             </a>
           </li>
           <li>
-            <a href="#">
+            <Link to="category">
               <span>دسته‌بندی‌ها</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#" onClick={logoutAdmin}>

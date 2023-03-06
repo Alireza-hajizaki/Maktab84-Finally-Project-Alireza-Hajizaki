@@ -10,13 +10,13 @@ const index = () => {
     <div>
         <Header/>
         
-        <section class="content">
-        <div class="content-header">
-                <span class="content-header__title">پنل کاربری من</span>
+        <section className="content">
+        <div className="content-header">
+                <span className="content-header__title">پنل کاربری من</span>
         </div>
-        <div class="content-main">
-            <div class="container total_container">
-                <div class="row">
+        <div className="content-main">
+            <div className="container total_container">
+                <div className="row">
                     <div className="col-3">
                       <Sidebar />
                     </div>

@@ -3,11 +3,13 @@ import { Link , useNavigate } from "react-router-dom";
 import './Sidebar.css'
 import AuthContext from '../../../Context/authContext'
 import swal from "sweetalert";
+import { useParams } from "react-router-dom";
 
 export default function Sidebar() {
 
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AuthContext);
+  const {"*":param} = useParams()
 
   const logoutAdmin = (e)=>{
     e.preventDefault()
@@ -20,29 +22,28 @@ export default function Sidebar() {
       navigate('/')
       window.location.reload(false)
     })
-  }
+}
   
-  // authContext.logout()
+
   return (
-    <div id="sidebar" class="col-2">
-      <div class="sidebar-header">
-        <div class="sidebar-logo">
+    <div id="sidebar" className="col-2">
+      <div className="sidebar-header">
+        <div className="sidebar-logo">
           <Link to="/">
             <img src="/images/logo/Logo-1.png" alt="Logo" className="sidebar_logo"/>
           </Link>
         </div>
-
-        <div class="sidebar-menu-btn">
+        <div className="sidebar-menu-btn">
         </div>
       </div>
-      <div class="sidebar-menu">
+      <div className="sidebar-menu">
         <ul>
-          <li class="active-menu">
+          <li className={param === "" ? "active-menu" : ""}>
             <Link to="/p-admin">
               <span>صفحه اصلی</span>
             </Link>
           </li>
-          <li>
+          <li className={param === "courses" ? "active-menu" : ""}>
             <Link to="courses">
               <span>دوره ها</span>
             </Link>
@@ -52,12 +53,12 @@ export default function Sidebar() {
               <span>منو ها</span>
             </a>
           </li>
-          <li>
+          <li className={param === "articles" ? "active-menu" : ""}>
             <Link to="articles">
               <span>مقاله ها</span>
             </Link>
           </li>
-          <li>
+          <li className={param === "users" ? "active-menu" : ""}>
             <Link to="users">
               <span>کاربران</span>
             </Link>
@@ -67,7 +68,7 @@ export default function Sidebar() {
               <span>کدهای تخفیف</span>
             </a>
           </li>
-          <li>
+          <li className={param === "category" ? "active-menu" : ""}>
             <Link to="category">
               <span>دسته‌بندی‌ها</span>
             </Link>

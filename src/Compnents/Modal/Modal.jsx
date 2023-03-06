@@ -10,7 +10,6 @@ function ModalEdit({show , setShow , value}) {
 
     }
     const[datas ,setDatas] = useState({name:"" , price:"" , iscomplete:""})
-    console.log(datas);
 
     return (
         <>

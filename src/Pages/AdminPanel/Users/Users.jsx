@@ -107,7 +107,7 @@ const registerNewUser = (event) => {
               <label class="input-title">نام و نام خانوادگی</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="name"
                 element="input"
                 validations={[
@@ -126,7 +126,7 @@ const registerNewUser = (event) => {
               <label class="input-title">نام کاربری</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="username"
                 element="input"
                 validations={[
@@ -145,7 +145,7 @@ const registerNewUser = (event) => {
               <label class="input-title">ایمیل</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="email"
                 element="input"
                 validations={[
@@ -165,7 +165,7 @@ const registerNewUser = (event) => {
               <label class="input-title">رمز عبور</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="password"
                 element="input"
                 validations={[
@@ -184,7 +184,7 @@ const registerNewUser = (event) => {
               <label class="input-title">شماره تلفن</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="phone"
                 element="input"
                 validations={[
@@ -208,7 +208,7 @@ const registerNewUser = (event) => {
         </form>
       </div>
        <DataTable title="کاربران">
-        <table className="table">
+        <table class="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -230,12 +230,12 @@ const registerNewUser = (event) => {
               <td>ali@gmail.com</td>
               <td>ehsan1323</td>
               <td>
-                <button type="button" className="btn btn-primary edit-btn">
+                <button type="button" class="btn btn-primary edit-btn">
                   ویرایش
                 </button>
               </td>
               <td>
-                <button type="button" className="btn btn-danger delete-btn">
+                <button type="button" class="btn btn-danger delete-btn">
                   حذف
                 </button>
               </td>

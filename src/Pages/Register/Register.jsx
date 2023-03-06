@@ -64,6 +64,7 @@ const Register = () => {
       button: "ورود به پنل کاربری"
     }).then(value => {
       navigate('/my-account')
+      window.location.reload(false)
     })
 }) 
 };

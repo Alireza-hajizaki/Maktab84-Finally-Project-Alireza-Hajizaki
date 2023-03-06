@@ -9,10 +9,11 @@ const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [show, setShow] = useState(false);
   const [courseData , setCourseData] = useState([])
+  const [datas ,setDatas] = useState({name:"" , price:"" , iscomplete:""})
   const [newCourse , setNewCourse] = useState({
     name:"",
     price: "",
-    isComplete:0 ,
+    isComplete: 0,
     shortName:"",
     creator:{name:""}
   })
@@ -48,15 +49,35 @@ const removeUser = (courseId) => {
   })
 }
 
-const editUser = (e) => {
-  setShow(true)
-  setCourseData(e)
-}
 
 const addCourses = (e) => {
   e.preventDefault()
   // setCourses(courses => [...courses, x])
   setCourses(courses.concat(newCourse))
+  setNewCourse({
+    name:"",
+    price: "",
+    isComplete: 0,
+    shortName:"",
+    creator:{name:""}
+  })
+}
+
+const addToTitle = (value) => {
+  setDatas({ ...datas, name: value });
+};
+const addToPrice = (value) => {
+  setDatas({ ...datas, price: value });
+};
+const addToIscomplete = (value) => {
+  setDatas({ ...datas, iscomplete: value });
+};
+
+console.log(datas);
+
+const editUser = (e) => {
+  setShow(true)
+  setCourseData(e)
 }
 
 
@@ -66,7 +87,10 @@ const addCourses = (e) => {
       <ModalEdit 
       show={show} 
       setShow={setShow} 
-      value={courseData} 
+      value={courseData}
+      addName={(e) => addToTitle(e.target.value)}
+      addPrice={(e) => addToPrice(e.target.value)}
+      addIscomplete={(e) => addToIscomplete(e.target.value)}
       />
       <div className="home-content-edit">
         <div className="back-btn">
@@ -103,7 +127,7 @@ const addCourses = (e) => {
               <input
                 type="text"
                 id="Condition"
-                onChange={(e) => {setNewCourse({...newCourse , isComplete: e.target.value})}}
+                onChange={(e) => {setNewCourse({...newCourse , isComplete:Number(e.target.value)})}}
                 placeholder="لطفا وضعیت دوره را وارد کنید(درحال برگزاری:0 & تکمیل:1)"
               />
               <span className="error-message text-danger"></span>

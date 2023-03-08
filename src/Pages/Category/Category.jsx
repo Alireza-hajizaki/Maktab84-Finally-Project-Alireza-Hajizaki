@@ -9,6 +9,7 @@ import BorderAllIcon from '@mui/icons-material/BorderAll';
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import SearchIcon from '@mui/icons-material/Search';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Category = () => {
 
@@ -16,10 +17,10 @@ const Category = () => {
   const [courses , setCourses] = useState([])
 
   useEffect(()=>{
-    fetch('http://localhost:3001/v1/courses/category/frontend',)
-    .then(res => res.json())
+    axios.get('http://localhost:3001/v1/courses/category/frontend',)
     .then(data => console.log(data))
   } ,[])
+
 
   return (
     <div>
@@ -87,7 +88,7 @@ const Category = () => {
            </div>
           </div>
 
-          <Pagination/>
+          {/* <Pagination/> */}
 
         </div>
       </section>

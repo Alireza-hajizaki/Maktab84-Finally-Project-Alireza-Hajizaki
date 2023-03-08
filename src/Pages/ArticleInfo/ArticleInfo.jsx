@@ -35,10 +35,6 @@ useEffect(()=>{
         .catch(err => console.log(err))
 } ,[])
 
-console.log(article);
-console.log(articleCreator);
-
-
 return (
     <div>
         <Header/>

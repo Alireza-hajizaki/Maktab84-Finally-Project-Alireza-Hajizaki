@@ -9,6 +9,7 @@ import { requiredValidator, minValidator, maxValidator, emailValidator } from ".
 import {useForm} from '../../Hook/useForm'
 import AuthContext from '../../Context/authContext';
 import swal from 'sweetalert';
+import axios from 'axios';
 
 const Register = () => {
 
@@ -48,13 +49,12 @@ const Register = () => {
       confirmPassword:  formState.inputs.password.value
   }
 
-  fetch(`http://localhost:3001/v1/auth/register`,{
-    method:'Post',
+  axios.post(`http://localhost:3001/v1/auth/register`,{
     headers:{
       'Content-type':"application/json",
     },
     body: JSON.stringify(newUserInfos),
-  }).then(res => res.json())
+  }).then(res => res.data)
   .then(result =>
     {
      authContext.login(result.user ,result.accessToken)

@@ -3,24 +3,34 @@ import DataTable from '../../../Compnents/AdminPanel/DataTable/DataTable'
 import swal from 'sweetalert';
 import axios from 'axios';
 import ModalEdit from '../../../Compnents/Modal/Modal';
+import { useForm } from "react-hook-form";
 
 const Courses = () => {
 
   const [courses, setCourses] = useState([]);
   const [show, setShow] = useState(false);
   const [courseData , setCourseData] = useState([])
-  const [datas ,setDatas] = useState({name:"" , price:"" , iscomplete:""})
-  const [newCourse , setNewCourse] = useState({
-    name:"",
-    price: "",
-    isComplete: 0,
+  const {register , handleSubmit, reset} = useForm({
+    defaultValues: {
+    name:"" ,
+    price:"" ,
+    isComplete: "",
     shortName:"",
     creator:{name:""}
+    }
+  })
+  const [datas ,setDatas] = useState({
+    name:"" ,
+    price:"" ,
+    isComplete: false,
+    shortName:"",
+    creator:{name:"Shahram"}
   })
 
   useEffect(()=>{
    getAllCourses()
 } ,[])
+
 
 function getAllCourses() {
   const localStorageData = JSON.parse(localStorage.getItem('user'))
@@ -41,6 +51,13 @@ const removeUser = (courseId) => {
     buttons: ["نه","آره"]
   }).then(resulte => {
     if(resulte){
+      // axios.delete(`http://localhost:3001/v1/courses/${courseId}`,{
+      //   headers:{
+      //     "Authorization" : `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
+      //   }
+      // }).then(() => {
+      //   getAllCourses()
+      // })
       const newCourses = courses.filter(course => {
       return course._id !== courseId
       })
@@ -49,37 +66,29 @@ const removeUser = (courseId) => {
   })
 }
 
-
-const addCourses = (e) => {
-  e.preventDefault()
+const addCourses = (newCourse) => {
   // setCourses(courses => [...courses, x])
   setCourses(courses.concat(newCourse))
-  setNewCourse({
-    name:"",
-    price: "",
-    isComplete: 0,
-    shortName:"",
-    creator:{name:""}
-  })
+  reset()
 }
 
-const addToTitle = (value) => {
-  setDatas({ ...datas, name: value });
-};
-const addToPrice = (value) => {
-  setDatas({ ...datas, price: value });
-};
-const addToIscomplete = (value) => {
-  setDatas({ ...datas, iscomplete: value });
-};
-
-console.log(datas);
+const onChangeInputValue = (e) =>{
+  const {target : {id , value}} = e
+  setDatas({...datas , [id]:value})
+}
 
 const editUser = (e) => {
   setShow(true)
   setCourseData(e)
 }
 
+const addEditedData = (courseId) => {
+  const newCourses = courses.filter(course => {
+    return course._id !== courseId
+    })
+    setCourses(newCourses.concat(datas))
+  setShow(false)
+}
 
 
   return (
@@ -88,23 +97,25 @@ const editUser = (e) => {
       show={show} 
       setShow={setShow} 
       value={courseData}
-      addName={(e) => addToTitle(e.target.value)}
-      addPrice={(e) => addToPrice(e.target.value)}
-      addIscomplete={(e) => addToIscomplete(e.target.value)}
+      ChangeInputValue={(e) => onChangeInputValue(e)}
+      func={(e) => addEditedData(e)}
       />
       <div className="home-content-edit">
         <div className="back-btn">
           <i className="fas fa-arrow-right"></i>
         </div>
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit(addCourses)}>
           <div className="col-6">
             <div className="name input">
               <label className="input-title">عنوان</label>
               <input
                 type="text"
                 id="title"
-                onChange={(e) => {setNewCourse({...newCourse , name: e.target.value})}}
                 placeholder="لطفا عنوان درسی خود را وارد کنید..."
+                {...register("name", {
+                  required:true,
+                  minLength:3,
+               })}
               />
               <span className="error-message text-danger"></span>
             </div>
@@ -115,8 +126,10 @@ const editUser = (e) => {
               <input
                 type="text"
                 id="price"
-                onChange={(e) => {setNewCourse({...newCourse , price: e.target.value})}}
                 placeholder="لطفا مبلغ هزینه شده برای دوره را وارد کنید..."
+                {...register("price", {
+                  required:true,
+               })}
               />
               <span className="error-message text-danger"></span>
             </div>
@@ -127,8 +140,10 @@ const editUser = (e) => {
               <input
                 type="text"
                 id="Condition"
-                onChange={(e) => {setNewCourse({...newCourse , isComplete:Number(e.target.value)})}}
-                placeholder="لطفا وضعیت دوره را وارد کنید(درحال برگزاری:0 & تکمیل:1)"
+                placeholder="لطفا وضعیت دوره را وارد کنید(درحال برگزاری:false & تکمیل:true)"
+                {...register("isComplete", {
+                  required:true,
+               })}
               />
               <span className="error-message text-danger"></span>
             </div>
@@ -139,7 +154,9 @@ const editUser = (e) => {
               <input
                 type="text"
                 id="link"
-                onChange={(e) => {setNewCourse({...newCourse , shortName: e.target.value})}}
+                {...register("shortName", {
+                  required:true,
+               })}
               />
               <span className="error-message text-danger"></span>
             </div>
@@ -151,7 +168,7 @@ const editUser = (e) => {
                 type="text"
                 id="teach"
                 placeholder="لطفا نام مدرس را وارد کنید..."
-                onChange={(e) => {setNewCourse({...newCourse , creator: {name: e.target.value}})}}
+                {...register('creator.name')}
               />
               <span className="error-message text-danger"></span>
             </div>
@@ -159,7 +176,7 @@ const editUser = (e) => {
           <div className="col-12">
             <div className="bottom-form">
               <div className="submit-btn">
-                <input type="submit" value="افزودن" onClick={addCourses}/>
+                <input type="submit" value="افزودن"/>
               </div>
             </div>
           </div>

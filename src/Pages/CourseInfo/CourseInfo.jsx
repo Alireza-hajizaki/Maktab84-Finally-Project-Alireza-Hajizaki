@@ -19,6 +19,7 @@ const CourseInfo = () => {
   const {courseName} = useParams()
   const [sessions, setSessions]= useState([])
   const [courseDeteils, setCourseDeteils]= useState({})
+  const [categoryTitle , setCategoryTitle] = useState({})
  
   useEffect(()=>{
     fetch(`http://localhost:3001/v1/courses/${courseName}`,{
@@ -29,9 +30,11 @@ const CourseInfo = () => {
     }).then(res => res.json())
     .then(courseInfo =>{
       setCourseDeteils(courseInfo)
+      setCategoryTitle(courseInfo.categoryID)
       setSessions(courseInfo.sessions)
     })
   } ,[])
+
 
   return (
     <div>
@@ -39,8 +42,8 @@ const CourseInfo = () => {
       <Breadcrumb
       links={[
         {id:1 , title:'خانه', to:''},
-        {id:2 , title:'آموزش برنامه نویسی فرانت اند', to:'category-info/frontend'},
-        {id:3 , title:'دوره جاوا اسکریپت', to:'course-info/js'},
+        {id:2 , title: categoryTitle.title , to:'category-info/frontend'},
+        {id:3 , title: courseName , to:`course-info/${courseName}`},
       ]}
       />
 
@@ -49,7 +52,7 @@ const CourseInfo = () => {
         <div className="row">
           <div className="col-6 course-info__container">
             <a href="#" className="course-info__link">
-              آموزش برنامه نویسی فرانت اند
+              {categoryTitle.title}
             </a>
             <h1 className="course-info__title">
               {courseDeteils.name}

@@ -9,6 +9,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import BorderAllIcon from '@mui/icons-material/BorderAll';
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios';
 
 const Courses = () => {
 
@@ -18,17 +19,19 @@ const Courses = () => {
   const [statusTitle, setStatusTitle] = useState('مرتب سازی پیش فرض')
   const [orderedCourses , setOrderCourses] = useState([])
   const [searchValue , setSearchValue] = useState('')
+  
   useEffect(()=>{
     const localStorageData = JSON.parse(localStorage.getItem('user'));
-    fetch('http://localhost:3001/v1/courses',{
-      method:'GET',
+    axios.get('http://localhost:3001/v1/courses',{
       headers:{
       "Authorization" : `Bearer ${localStorageData.token}`
       },
-    }).then(res => res.json())
+    }).then(res => res.data)
     .then(data => {
       setCourses(data)
-      setOrderCourses(data)})
+      setOrderCourses(data)}
+      )
+      .catch(err => console.log(err))
   } ,[])
 
 
@@ -57,7 +60,6 @@ const Courses = () => {
       default:{
         setOrderCourses(courses)
       }
-        break;
     }
   } ,[status])
 
@@ -153,7 +155,7 @@ const Courses = () => {
             <div className="container">
               <div className="row">
                 {shownCourses.map(course =>(
-                  <CourseBox {...course}/>
+                  <CourseBox key={course._id} {...course}/>
                 ))}
               </div>
             </div>

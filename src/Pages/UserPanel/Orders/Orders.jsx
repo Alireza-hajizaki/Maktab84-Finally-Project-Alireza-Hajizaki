@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 import "./Orders.css";
 
@@ -6,18 +8,18 @@ export default function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/v1/orders`, {
+    axios.get(`http://localhost:3001/v1/orders`, {
       headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => res.data)
       .then((data) => {
-        console.log(data);
         setOrders(data);
-      });
+      })
+      .catch(err => console.log(err))
   }, []);
 
   return (

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "./Modal.css"
 
-function ModalEdit({show , setShow , value , addName, addPrice, addIscomplete}) {
+function ModalEdit({show , setShow , value , ChangeInputValue , func}) {
 
     const handleClose = () => {
         setShow(false)
@@ -17,17 +17,19 @@ function ModalEdit({show , setShow , value , addName, addPrice, addIscomplete}) 
                 </Modal.Header>
                 <Modal.Body className='container_modal'>
                     <label>عنوان:</label>
-                    <input type="text" onChange={addName} className='input_modal' defaultValue={value.name}/>
+                    <input type="text" id='name' onChange={ChangeInputValue} className='input_modal' defaultValue={value.name}/>
                     <label>مبلغ:</label>
-                    <input type="text" onChange={addPrice} className='input_modal' defaultValue={value.price === 0 ? 'رایگان' : value.price} />
+                    <input type="text" id='price' onChange={ChangeInputValue} className='input_modal' defaultValue={value.price === 0 ? 'رایگان' : value.price} />
+                    <label>لینک:</label>
+                    <input type="text" id='shortName' onChange={ChangeInputValue} className='input_modal' defaultValue={value.shortName} />
                     <label>وضعیت:</label>
-                    <input type="text" onChange={addIscomplete} className='input_modal' defaultValue={value.isComplete === 0 ? 'در حال برگزاری' : 'تکمیل شده'} />
+                    <input type="text" id='isComplete' onChange={ChangeInputValue} className='input_modal' defaultValue={Number(value.isComplete) === 0 ? 'در حال برگزاری' : 'تکمیل شده'} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => handleClose()}>
+                    <Button variant="secondary" onClick={() => func(value._id)}>
                         ذخیره
                     </Button>
-                    <Button variant="primary" onClick={() => setShow(false)}>
+                    <Button variant="primary" onClick={handleClose}>
                         نه
                     </Button>
                 </Modal.Footer>

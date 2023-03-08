@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import "./Courses.css";
 
@@ -6,14 +7,14 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/v1/users/courses/`, {
+    axios.get(`http://localhost:3001/v1/users/courses/`, {
       headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => res.data)
       .then((data) => {
         setCourses(data);
       });

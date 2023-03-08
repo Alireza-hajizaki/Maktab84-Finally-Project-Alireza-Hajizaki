@@ -8,8 +8,8 @@ import {Link} from 'react-router-dom';
 
 const NavBar = () => {
 
-  const [allMenus, setAllMenus] = useState([]);
   const authContext = useContext(AuthContext);
+  const [allMenus, setAllMenus] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:3001/v1/menus`)
@@ -34,7 +34,7 @@ const NavBar = () => {
                 </li>
 
                 {allMenus.map((menu) => (
-                <li className="main-header__item">
+                <li className="main-header__item" key={menu._id}>
                   <Link to={menu.href} className="main-header__link">
                     {menu.title}
                     {menu.submenus.length !== 0 && (

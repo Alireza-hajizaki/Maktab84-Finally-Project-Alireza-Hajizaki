@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useState} from 'react';
 import './App.css';
 import {useRoutes} from "react-router-dom";
 import routes from './router';
-import { useSelector} from 'react-redux'
 import AuthContext from './Context/authContext';
 
 function App() {
@@ -44,8 +43,6 @@ function App() {
   } ,[login , logout])
 
   const router = useRoutes(routes)
-
-  const courses = useSelector((store) => store.courseInfo)
 
   return (
     <div className='App'>

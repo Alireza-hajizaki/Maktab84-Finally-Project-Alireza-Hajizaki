@@ -73,6 +73,9 @@ const addCourses = (newCourse) => {
 }
 
 const onChangeInputValue = (e) =>{
+  // if(e.target.id === "isComplete"){
+  //  return Number(e.target.id)
+  // }
   const {target : {id , value}} = e
   setDatas({...datas , [id]:value})
 }
@@ -140,7 +143,7 @@ const addEditedData = (courseId) => {
               <input
                 type="text"
                 id="Condition"
-                placeholder="لطفا وضعیت دوره را وارد کنید(درحال برگزاری:false & تکمیل:true)"
+                placeholder="لطفا وضعیت دوره را وارد کنید(درحال برگزاری:0 & تکمیل:1)"
                 {...register("isComplete", {
                   required:true,
                })}

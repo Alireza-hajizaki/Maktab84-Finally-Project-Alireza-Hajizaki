@@ -12,6 +12,11 @@ import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CommentTextArea from '../../Compnents/CommentTextArea/CommentTextArea';
 import { useParams } from 'react-router';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { useDispatch} from 'react-redux';
+import {ADD} from '../../Redux/slices/courseInfoSlice'
+import { Link } from 'react-router-dom';
+
 
 
 const CourseInfo = () => {
@@ -20,6 +25,8 @@ const CourseInfo = () => {
   const [sessions, setSessions]= useState([])
   const [courseDeteils, setCourseDeteils]= useState({})
   const [categoryTitle , setCategoryTitle] = useState({})
+  const dispatch = useDispatch()
+  
  
   useEffect(()=>{
     fetch(`http://localhost:3001/v1/courses/${courseName}`,{
@@ -34,6 +41,14 @@ const CourseInfo = () => {
       setSessions(courseInfo.sessions)
     })
   } ,[])
+
+
+  const addToCourseUser = (e)=> {
+    dispatch(ADD(e))
+   
+    // localStorage.setItem('userCourse' , JSON.stringify([e]))
+  }
+  
 
 
   return (
@@ -153,11 +168,13 @@ const CourseInfo = () => {
           <div className="col-4">
             <div className="courses-info">
               <div className="course-info">
-                <div className="course-info__register">
+                <div className="course-info__register" onClick={() => addToCourseUser(courseDeteils)}>
+                  <Link to='#'>
                   <span className="course-info__register-title">
-                    <i className="fas fa-graduation-cap course-info__register-icon"></i>
-                    دانشجوی دوره هستید
+                    <LockOpenIcon fontSize='large'/>
+                    ثبت نام
                   </span>
+                  </Link>
                 </div>
               </div>
               <div className="course-info">

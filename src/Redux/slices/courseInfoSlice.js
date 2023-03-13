@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [];
+const initialState = {
+    courseId:[],
+};
 
 export const courseInfoSlice = createSlice({
     initialState,
     name: 'courseInfo',
     reducers: {
         ADD :(state , action) => {
-            state.push(action.payload)
+            state.courseId = action.payload;
         }
     }
 })
 
-export const {Add} = courseInfoSlice.actions;
+export const {ADD} = courseInfoSlice.actions;
 export default courseInfoSlice.reducer;
